@@ -4,6 +4,8 @@ import './App.css'; // Asegúrate de que este archivo CSS contiene los estilos d
 import prestamo from './valoruf.js';
 import SolicitudPrestamoX from './SolicitudPrestamo';
 
+// ola
+
 import {
   Navbar, Nav, Form,Card, FormControl, Button, Container, Row, Col
 } from 'react-bootstrap';
