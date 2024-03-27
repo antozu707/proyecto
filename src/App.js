@@ -5,6 +5,7 @@ import prestamo from './valoruf.js';
 import SolicitudPrestamoX from './SolicitudPrestamo';
 
 // ola
+// vale bro
 
 import {
   Navbar, Nav, Form,Card, FormControl, Button, Container, Row, Col
