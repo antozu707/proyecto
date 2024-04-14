@@ -5,7 +5,11 @@ import { Card, Button } from "react-bootstrap";
 function Prestamo(props) {
   const [cuota, setCuota] = useState(null);
   const [valorUF, setValorUF] = useState(null);
+  const [valorEURO, setValorEURO] = useState(null);
+  const [valorDOLAR, setValorDOLAR] = useState(null);
   const [fechaUF, setFechaUF] = useState(null);
+  const [fechaEURO, setFechaEURO] = useState(null);
+  const [fechaDOLAR, setFechaDOLAR] = useState(null);
   const [botonPresionado, setBotonPresionado] = useState(false);
 
   useEffect(() => {
@@ -17,6 +21,23 @@ function Prestamo(props) {
           setFechaUF(data.serie[0].fecha);
         }
       });
+      axios.get("https://mindicador.cl/api/euro")
+      .then(res => {
+        const data = res.data;
+        if (data.serie && data.serie.length > 0) {
+          setValorEURO(data.serie[0].valor);
+          setFechaEURO(data.serie[0].fecha);
+        }
+      });
+      axios.get("https://mindicador.cl/api/dolar")
+      .then(res => {
+        const data = res.data;
+        if (data.serie && data.serie.length > 0) {
+          setValorDOLAR(data.serie[0].valor);
+          setFechaDOLAR(data.serie[0].fecha);
+        }
+      });
+
   }, []);
 
   const calcularCuota = () => {
@@ -58,8 +79,11 @@ function Prestamo(props) {
       <Card style={cardStyle}>
         <Card.Body>
           <Card.Title>Datos de la UF</Card.Title>
-          {valorUF && <Card.Text><strong>Valor UF:</strong> ${valorUF.toFixed(2)}</Card.Text>}
+          {valorUF && <Card.Text><strong>Valor UF:</strong> ${valorUF.toFixed(2)} </Card.Text>}
+          {valorUF && <Card.Text><strong>Valor EURO:</strong> ${valorEURO.toFixed(2)} </Card.Text>}
+          {valorUF && <Card.Text><strong>Valor DOLAR:</strong> ${valorDOLAR.toFixed(2)} </Card.Text>}
           {fechaUF && <Card.Text><strong>Fecha UF:</strong> {formatDate(fechaUF)}</Card.Text>}
+          {fechaUF && <Card.Text><strong>Fecha EURO y DOLAR:</strong> {formatDate(fechaEURO)} ; {formatDate(fechaDOLAR)}</Card.Text>}
         </Card.Body>
       </Card>
       <Card style={cardStyle}>
